@@ -1,0 +1,125 @@
+# ============================================================
+#  CityPlugin 配置文件
+#  修改后需重启服务器生效（/city build reload 仅重载建筑模板）
+# ============================================================
+
+region:
+  # 是否启用区域标注与 BossBar 显示
+  enabled: true
+
+builder:
+  # 是否启用建筑生成功能
+  enabled: true
+
+  # 建筑模板目录（相对 plugins/CityPlugin/）
+  buildings-folder: buildings
+
+  # 单 tick 最多放置的方块数（全局预算，所有玩家共享）
+  blocks-per-tick: 2000
+
+  # 单个建造任务的最大方块数
+  max-queue-blocks: 300000
+
+  # 单个模板的最大方块数（超出拒绝加载）
+  max-template-blocks: 200000
+
+  # 地基最大深度（超过则判定地形过陡，拒绝生成）
+  max-foundation-depth: 32
+
+  # 建筑最大高度（相对基准面）
+  max-build-height: 160
+
+  # 默认地基方块
+  foundation-block: minecraft:stone_bricks
+
+  # 按类别覆盖地基方块，例如：
+  # foundation-block-per-category:
+  #   residential: minecraft:stone
+  #   industrial: minecraft:iron_block
+  foundation-block-per-category: {}
+
+  # 是否允许在水面上生成（false 时，足迹内有水则拒绝）
+  fill-water: false
+
+  # 是否遵守区域标注（true 时，足迹区块已被标注则拒绝，除非加 --force）
+  respect-regions: true
+
+  # 地形扫描时不计为“地面”的方块（水、岩浆、树叶、草等）
+  # 支持 #tag（原版方块标签）、minecraft:xxx、xxx 三种写法
+  ground-ignore:
+    - minecraft:water
+    - minecraft:lava
+    - '#leaves'
+    - '#logs'
+    - minecraft:short_grass
+    - minecraft:tall_grass
+    - minecraft:fern
+    - minecraft:large_fern
+    - minecraft:dead_bush
+    - minecraft:snow
+    - minecraft:vine
+
+  # 允许被直接覆盖/清除的自然方块（占位检查白名单）
+  # 建筑体积、地基夹层、以及“地面方块本身”都必须在此名单内
+  natural-blocks:
+    - minecraft:air
+    - minecraft:cave_air
+    - minecraft:void_air
+    - '#leaves'
+    - '#logs'
+    - '#flowers'
+    - '#saplings'
+    - '#crops'
+    - '#replaceable_by_trees'
+    - '#base_stone_overworld'
+    - '#base_stone_nether'
+    - '#dirt'
+    - '#sand'
+    - '#snow'
+    - '#ice'
+    - minecraft:short_grass
+    - minecraft:tall_grass
+    - minecraft:fern
+    - minecraft:large_fern
+    - minecraft:dead_bush
+    - minecraft:vine
+    - minecraft:water
+    - minecraft:lava
+    - minecraft:gravel
+    - minecraft:clay
+    - minecraft:moss_block
+    - minecraft:podzol
+    - minecraft:mycelium
+    - minecraft:mud
+    - minecraft:sandstone
+    - minecraft:red_sandstone
+    - minecraft:terracotta
+    - minecraft:netherrack
+    - minecraft:soul_sand
+    - minecraft:soul_soil
+    - minecraft:basalt
+    - minecraft:blackstone
+    - minecraft:end_stone
+    - minecraft:obsidian
+    - minecraft:bedrock
+    - minecraft:magma_block
+    - minecraft:dripstone_block
+    - minecraft:moss_carpet
+    - minecraft:crimson_nylium
+    - minecraft:warped_nylium
+
+  # 撤销历史保留的建造次数（按玩家，仅内存）
+  undo-history: 5
+
+  zone:
+    # 批量生成的最大区域面积（长 × 宽，方块数）
+    max-area: 16384
+
+    # 单次最大建筑数量
+    max-buildings: 64
+
+    # 建筑之间默认空隙（道路宽度）
+    spacing: 7
+
+  messages:
+    prefix: '§6[City] §r'

@@ -1,0 +1,49 @@
+name: CityPlugin
+version: 2.0.0
+main: com.xiling.city.CityPlugin
+api-version: '1.21'
+description: City region tags and terrain-adaptive building generation
+author: Xiling
+depend: [WorldEdit]
+
+commands:
+  city:
+    description: CityPlugin main command
+    usage: /city <region|build> <subcommand>
+    aliases: [region, rg]
+  buildat:
+    description: Generate a building at the targeted location
+    usage: /buildat <template> [0|90|180|270] [--force] [--preview]
+    aliases: [ba]
+  buildzone:
+    description: Generate a grid of buildings inside a selection
+    usage: /buildzone <template|random|category> [--spacing N] [--radius N] [--rotation ...]
+    aliases: [bz]
+
+permissions:
+  city.user:
+    description: View region info and list regions
+    default: true
+  city.admin:
+    description: Tag regions and run cleanup commands
+    default: op
+  city.build:
+    description: Generate a building at a location
+    default: op
+  city.build.zone:
+    description: Generate a grid of buildings in an area
+    default: op
+  city.build.undo:
+    description: Undo the last building generation
+    default: op
+  city.build.admin:
+    description: Force placement, reload templates, cancel other jobs
+    default: op
+
+  # Legacy nodes from RegionPlugin, kept for existing permission groups.
+  region.admin:
+    description: Legacy alias of city.admin
+    default: op
+  region.user:
+    description: Legacy alias of city.user
+    default: true
