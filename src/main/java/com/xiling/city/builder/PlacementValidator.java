@@ -115,36 +115,6 @@ public class PlacementValidator {
                     + String.join("；", offenders)
                     + "。如确认覆盖请加 --force", "被占用");
         }
-
-        if (plugin.getCityConfig().respectRegions()) {
-            Set<String> regionNames = collectRegions(world, minX, minZ, width, depth);
-            if (!regionNames.isEmpty()) {
-                throw new BuildException("该位置属于已标注区域：" + String.join("；", regionNames)
-                        + "。如确认覆盖请加 --force", "区域保护");
-            }
-        }
-    }
-
-    private Set<String> collectRegions(World world, int minX, int minZ, int width, int depth) {
-        DatabaseManager database = plugin.getDatabaseManager();
-        Set<String> names = new LinkedHashSet<>();
-
-        int minChunkX = minX >> 4;
-        int maxChunkX = (minX + width - 1) >> 4;
-        int minChunkZ = minZ >> 4;
-        int maxChunkZ = (minZ + depth - 1) >> 4;
-
-        for (int chunkX = minChunkX; chunkX <= maxChunkX; chunkX++) {
-            for (int chunkZ = minChunkZ; chunkZ <= maxChunkZ; chunkZ++) {
-                String regionId = database.getRegionId(world.getName(), chunkX, chunkZ);
-                if (regionId == null) {
-                    continue;
-                }
-                RegionModel region = database.getRegionById(regionId);
-                names.add(region != null ? region.getFormattedDisplay() : regionId);
-            }
-        }
-        return names;
     }
 
     private static boolean isInsideBorder(World world, int minX, int minZ, int width, int depth, int y) {
